@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:production/resources/hard_coded.dart';
 
 class ProductChoice extends StatefulWidget {
   final ValueChanged<String> onMonthChange;
@@ -19,58 +20,6 @@ class ProductChoice extends StatefulWidget {
 }
 
 class ProductChoiceState extends State<ProductChoice> {
-  List monthList = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-  ];
-
-  List yearList = [
-    "2000",
-    "2001",
-    "2002",
-    "2003",
-    "2004",
-    "2005",
-    "2006",
-    "2007",
-    "2008",
-    "2009",
-    "2010",
-    "2011",
-    "2012",
-    "2013",
-    "2014",
-    "2015",
-    "2016",
-    "2017",
-    "2018",
-    "2019",
-    "2020",
-    "2021",
-    "2022",
-    "2023",
-    "2024",
-    "2025",
-    "2026",
-    "2027",
-    "2028",
-    "2029",
-    "2030"
-  ];
-
-  List nameList = ["naibai", "xiaobai", "lettuce"];
-
-  List zoneList = ["1", "2", "3", "4", "5", "6", "7"];
 
   String? _selectedMonth;
   String? _selectedYear;
@@ -115,7 +64,7 @@ class ProductChoiceState extends State<ProductChoice> {
                       });
                       widget.onMonthChange(newMonth.toString());
                     },
-                    items: monthList.map((monthItem) {
+                    items: Resources.monthList.map((monthItem) {
                       return DropdownMenuItem(
                         value: monthItem,
                         child: Text(monthItem),
@@ -155,7 +104,7 @@ class ProductChoiceState extends State<ProductChoice> {
                       });
                       widget.onYearChange(yearValue.toString());
                     },
-                    items: yearList.map((yearItem) {
+                    items: Resources.yearList.map((yearItem) {
                       return DropdownMenuItem(
                         value: yearItem,
                         child: Text(yearItem),
@@ -201,7 +150,7 @@ class ProductChoiceState extends State<ProductChoice> {
                     });
                     widget.onNameChange(nameValue.toString());
                   },
-                  items: nameList.map((nameItems) {
+                  items: Resources.nameList.map((nameItems) {
                     return DropdownMenuItem(
                       value: nameItems,
                       child: Text(nameItems),
@@ -241,7 +190,7 @@ class ProductChoiceState extends State<ProductChoice> {
                     });
                     widget.onZoneChange(zoneValue.toString());
                   },
-                  items: zoneList.map((zoneItems) {
+                  items: Resources.zoneList.map((zoneItems) {
                     return DropdownMenuItem(
                       value: zoneItems,
                       child: Text(zoneItems),
