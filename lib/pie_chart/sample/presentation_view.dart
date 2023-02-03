@@ -14,7 +14,7 @@ class PresentationView extends StatefulWidget {
 class _PresentationViewState extends State<PresentationView> {
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  String? _selectedMonth;
+  String? _selectedMonth, _selectedYear;
 
   @override
   void dispose() {
@@ -34,28 +34,59 @@ class _PresentationViewState extends State<PresentationView> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Align(
-                alignment: const AlignmentDirectional(1, 0.3),
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 10, 0),
-                  child: DropdownButton(
-                    hint: const Text("Please Select... "),
-                    elevation: 2,
-                    value: _selectedMonth,
-                    onChanged: (monthValue) {
-                      setState(() {
-                        _selectedMonth = monthValue as String?;
-                      });
-                    },
-                    items: Resources.monthList.map((monthItem) {
-                      return DropdownMenuItem(
-                        value: monthItem,
-                        child: Text(monthItem),
-                      );
-                    }).toList(),
-                    underline: const SizedBox(),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Align(
+                    alignment: const AlignmentDirectional(1, 0.3),
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0, 20, 10, 0),
+                      child: DropdownButton(
+                        hint: const Text("Select Month "),
+                        elevation: 2,
+                        value: _selectedMonth,
+                        onChanged: (monthValue) {
+                          setState(() {
+                            _selectedMonth = monthValue as String?;
+                          });
+                        },
+                        items: Resources.monthList.map((monthItem) {
+                          return DropdownMenuItem(
+                            value: monthItem,
+                            child: Text(monthItem),
+                          );
+                        }).toList(),
+                        underline: const SizedBox(),
+                      ),
+                    ),
                   ),
-                ),
+                  Align(
+                    alignment: const AlignmentDirectional(1, 0.3),
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0, 20, 10, 0),
+                      child: DropdownButton(
+                        hint: const Text("Select Year "),
+                        elevation: 2,
+                        value: _selectedYear,
+                        onChanged: (yearValue) {
+                          setState(() {
+                            _selectedYear = yearValue as String?;
+                          });
+                        },
+                        items: Resources.yearList.map((yearItem) {
+                          return DropdownMenuItem(
+                            value: yearItem,
+                            child: Text(yearItem),
+                          );
+                        }).toList(),
+                        underline: const SizedBox(),
+                        
+                      ),
+                    ),
+                  ),
+                ],
               ),
               Align(
                 alignment: const AlignmentDirectional(0, 0),

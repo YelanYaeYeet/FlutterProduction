@@ -3,6 +3,7 @@ import 'package:production/page/create_page.dart';
 import 'package:production/pie_chart/sample/pie_chart_view.dart';
 import 'package:production/pie_chart/sample/presentation_view.dart';
 import 'package:production/productions/api/productions_api.dart';
+import 'package:production/productions/product_manager.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,6 +14,7 @@ Future main() async {
     home: MyApp(),
   ));
 }
+
 
 class MyApp extends StatefulWidget {
   static const String title = 'Production Sheet';
@@ -61,7 +63,7 @@ class _MyAppState extends State<MyApp> {
       case 0:
         return Center(
           child: Container(
-            child: Text("Home Display"),
+            child: Text("Home Page"),
           ),
         );
       case 1:

@@ -19,21 +19,21 @@ class ProductionSheetsApi {
 
   static const _spreadsheetID = '12s7y6JGQdXuoMUQ53FJhzeSMrguhbjHf7pdgik6uYHY';
   static final _gsheets = GSheets(_credentials);
-  static Worksheet? _productSheet;
+  static Worksheet? productSheet;
 
   static Future init() async {
     try {
       final spreadsheet = await _gsheets.spreadsheet(_spreadsheetID);
-      _productSheet = await _getWorkSheet(spreadsheet, title: 'Production');
+      productSheet = await getWorkSheet(spreadsheet, title: 'Production');
 
       final firstRow = ProductionField.getFields();
-      _productSheet!.values.insertRow(1, firstRow);
+      productSheet!.values.insertRow(1, firstRow);
     } catch (e) {
       print('Init Error: $e');
     }
   }
 
-  static Future<Worksheet> _getWorkSheet(
+  static Future<Worksheet> getWorkSheet(
     Spreadsheet spreadsheet, {
     required String title,
   }) async {
@@ -44,10 +44,16 @@ class ProductionSheetsApi {
     }
   }
 
+  Future<List<Products>?> getAll() async {
+    await init();
+    final products = await productSheet?.values.map.allRows();
+    return products?.map((json) => Products.fromGsheets(json)).toList();
+  }
+
   static Future insert(List<Map<String, dynamic>> rowList) async {
-    if (_productSheet == null) {
+    if (productSheet == null) {
       print("oh no");
     }
-    _productSheet!.values.map.appendRows(rowList);
+    productSheet!.values.map.appendRows(rowList);
   }
 }
