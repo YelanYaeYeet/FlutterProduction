@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:production/page/create_page.dart';
-import 'package:production/pie_chart/sample/pie_chart_view.dart';
+import 'package:production/pie_chart/sample/pie_chart_view_weight.dart';
 import 'package:production/pie_chart/sample/presentation_view.dart';
 import 'package:production/productions/api/productions_api.dart';
 import 'package:production/productions/product_manager.dart';

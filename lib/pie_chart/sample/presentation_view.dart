@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:production/pie_chart/sample/pie_chart_view.dart';
+import 'package:production/pie_chart/sample/pie_chart_view_number.dart';
+import 'package:production/pie_chart/sample/pie_chart_view_weight.dart';
 import 'package:production/resources/hard_coded.dart';
 
 class PresentationView extends StatefulWidget {
@@ -82,16 +81,22 @@ class _PresentationViewState extends State<PresentationView> {
                           );
                         }).toList(),
                         underline: const SizedBox(),
-                        
                       ),
                     ),
                   ),
                 ],
               ),
+              const Align(
+                alignment: AlignmentDirectional(-0.95, 0),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                  child: Text('Weight'),
+                ),
+              ),
               Align(
                 alignment: const AlignmentDirectional(0, 0),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(10, 60, 10, 50),
+                  padding: const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 20),
                   child: Container(
                     width: 366.6,
                     height: 366.8,
@@ -99,6 +104,27 @@ class _PresentationViewState extends State<PresentationView> {
                       color: Colors.grey,
                     ),
                     child: PieChartSampleView(),
+                  ),
+                ),
+              ),
+              const Align(
+                alignment: AlignmentDirectional(-0.95, 0),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                  child: Text('Quantity'),
+                ),
+              ),
+              Align(
+                alignment: const AlignmentDirectional(0, 0),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 20),
+                  child: Container(
+                    width: 366.6,
+                    height: 366.8,
+                    decoration: const BoxDecoration(
+                      color: Colors.grey,
+                    ),
+                    child: PieChartSampleView1(),
                   ),
                 ),
               )
