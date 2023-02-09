@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:production/productions/product_manager.dart';
+import 'package:production/productions/values_getter.dart';
 import 'package:production/resources/indicator.dart';
 
 class PieChartSampleView extends StatefulWidget {
@@ -15,6 +16,12 @@ class PieChartSampleView extends StatefulWidget {
 
 class PieChartSampleViewState extends State {
   int touchedIndex = 0;
+  String selectedPaiYear = '2022', selectedPaimon = 'September';
+  // PaiSelection _paiSelection = PaiSelection();
+
+  void _reloadWidget() {
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,29 +71,33 @@ class PieChartSampleViewState extends State {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const <Widget>[
+                      children: <Widget>[
                         Indicator(
-                          color: Color(0xff0293ee),
+                          color: const Color(0xff0293ee),
                           text: 'NaiBai(奶白)',
                           isSquare: true,
+                          picture: SvgPicture.asset('bok-choy-svgrepo-com.svg'),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 4,
                         ),
                         Indicator(
-                          color: Color(0xff845bef),
+                          color: const Color(0xff845bef),
                           text: 'XiaoBai(小白)',
                           isSquare: true,
+                          picture:
+                              SvgPicture.asset('leafy-green-svgrepo-com.svg'),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 4,
                         ),
                         Indicator(
-                          color: Color(0xff13d38e),
+                          color: const Color(0xff13d38e),
                           text: 'Lettuce',
                           isSquare: true,
+                          picture: SvgPicture.asset('salad-svgrepo-com.svg'),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 4,
                         ),
                       ],
@@ -95,17 +106,24 @@ class PieChartSampleViewState extends State {
                 )),
           );
         } else {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
       },
     );
   }
 
   Future<List<PieChartSectionData>> showingSections() async {
-    ProductManager productManager = ProductManager();
-    double lWeight = await productManager.getLettuceWeight();
-    double xbWeight = await productManager.getNaiBaiWeight();
-    double nbWeight = await productManager.getNaiBaiWeight();
+    ProductionGet productManager = ProductionGet();
+    double lWeight = await productManager.getLettuceWeight(selectedPaiYear, selectedPaimon);
+    double xbWeight = await productManager.getXiaoBaiWeight(selectedPaiYear, selectedPaimon);
+    double nbWeight = await productManager.getNaiBaiWeight(selectedPaiYear, selectedPaimon);
+    double total = lWeight + xbWeight + nbWeight;
+    double lw = (lWeight / total) * 100,
+        xw = (xbWeight / total) * 100,
+        nw = (nbWeight / total) * 100;
+    String lws = lw.toStringAsFixed(1),
+        xws = xw.toStringAsFixed(1),
+        nws = nw.toStringAsFixed(1);
 
     return List.generate(3, (i) {
       final isTouched = i == touchedIndex;
@@ -118,7 +136,7 @@ class PieChartSampleViewState extends State {
           return PieChartSectionData(
             color: const Color(0xff0293ee),
             value: nbWeight,
-            title: 'Naibai',
+            title: "NaiBai \n $nws% \n $nbWeight",
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
@@ -126,7 +144,7 @@ class PieChartSampleViewState extends State {
               color: const Color(0xffffffff),
             ),
             badgeWidget: _Badge(
-              'assets/soldier-svgrepo-com.svg',
+              'assets/bok-choy-svgrepo-com.svg',
               size: widgetSize,
               borderColor: const Color(0xff0293ee),
             ),
@@ -136,7 +154,7 @@ class PieChartSampleViewState extends State {
           return PieChartSectionData(
             color: const Color(0xff845bef),
             value: xbWeight,
-            title: 'XiaoBai',
+            title: "XiaoBai \n $xws% \n $xbWeight",
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
@@ -144,7 +162,7 @@ class PieChartSampleViewState extends State {
               color: const Color(0xffffffff),
             ),
             badgeWidget: _Badge(
-              'assets/welder-svgrepo-com.svg',
+              'assets/leafy-green-svgrepo-com.svg',
               size: widgetSize,
               borderColor: const Color(0xff845bef),
             ),
@@ -154,7 +172,7 @@ class PieChartSampleViewState extends State {
           return PieChartSectionData(
             color: const Color(0xff13d38e),
             value: lWeight,
-            title: 'Lettuce',
+            title: 'Lettuce \n $lws% \n $lWeight',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
@@ -162,7 +180,7 @@ class PieChartSampleViewState extends State {
               color: const Color(0xffffffff),
             ),
             badgeWidget: _Badge(
-              'assets/director-svgrepo-com.svg',
+              'assets/salad-svgrepo-com.svg',
               size: widgetSize,
               borderColor: const Color(0xff13d38e),
             ),

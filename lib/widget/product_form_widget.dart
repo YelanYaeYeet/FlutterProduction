@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:production/lib/model/production_field.dart';
 import 'package:production/widget/button_widget.dart';
 import 'package:production/widget/pick_up_widget.dart';
+import 'dart:developer';
 
 class ProductFormWidget extends StatefulWidget {
   final ValueChanged<Products> onSavedProducts;
@@ -12,6 +13,7 @@ class ProductFormWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _ProductFormWidgetState createState() => _ProductFormWidgetState();
 }
 
@@ -93,6 +95,7 @@ class _ProductFormWidgetState extends State<ProductFormWidget> {
             return 'Enter Weight';
           }
 
+          // ignore: unused_local_variable
           int weight;
           try {
             weight = int.parse(value);
@@ -115,6 +118,7 @@ class _ProductFormWidgetState extends State<ProductFormWidget> {
             return 'Enter Weight';
           }
 
+          // ignore: unused_local_variable
           int weight;
           try {
             weight = int.parse(value);
@@ -141,9 +145,9 @@ class _ProductFormWidgetState extends State<ProductFormWidget> {
           }
 
           if (error == 0) {
-            print("click button");
+            log("click button");
           } else if (!isValid) {
-            print("enter");
+            log("enter");
           } else {
             final products = Products(
               year: _yearValue,

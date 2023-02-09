@@ -1,5 +1,5 @@
 class Resources {
-  static final List monthList = [
+  static final List<String> monthList = [
     "January",
     "February",
     "March",
@@ -14,7 +14,7 @@ class Resources {
     "December"
   ];
 
-  static final List yearList = [
+  static final List<String> yearList = [
     "2020",
     "2021",
     "2022",

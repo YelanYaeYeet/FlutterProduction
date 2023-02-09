@@ -7,7 +7,8 @@ class ProductChoice extends StatefulWidget {
   final ValueChanged<String> onNameChange;
   final ValueChanged<String> onZoneChange;
 
-  ProductChoice({
+  // ignore: use_key_in_widget_constructors
+  const ProductChoice({
     Key? key,
     required this.onMonthChange,
     required this.onYearChange,
@@ -39,7 +40,7 @@ class ProductChoiceState extends State<ProductChoice> {
         children: [
           Row(
             children: [
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Container(
@@ -60,7 +61,7 @@ class ProductChoiceState extends State<ProductChoice> {
                     value: _selectedMonth,
                     onChanged: (newMonth) {
                       setState(() {
-                        _selectedMonth = newMonth as String?;
+                        _selectedMonth = newMonth;
                       });
                       widget.onMonthChange(newMonth.toString());
                     },
@@ -100,7 +101,7 @@ class ProductChoiceState extends State<ProductChoice> {
                     value: _selectedYear,
                     onChanged: (yearValue) {
                       setState(() {
-                        _selectedYear = yearValue as String?;
+                        _selectedYear = yearValue;
                       });
                       widget.onYearChange(yearValue.toString());
                     },

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:gsheets/gsheets.dart';
 import 'package:production/lib/model/production_field.dart';
 
@@ -29,7 +30,7 @@ class ProductionSheetsApi {
       final firstRow = ProductionField.getFields();
       productSheet!.values.insertRow(1, firstRow);
     } catch (e) {
-      print('Init Error: $e');
+      log('Init Error: $e');
     }
   }
 
@@ -52,7 +53,7 @@ class ProductionSheetsApi {
 
   static Future insert(List<Map<String, dynamic>> rowList) async {
     if (productSheet == null) {
-      print("oh no");
+      log("oh no");
     }
     productSheet!.values.map.appendRows(rowList);
   }

@@ -1,181 +1,104 @@
-import 'package:production/productions/api/productions_api.dart';
+import 'package:flutter/material.dart';
+import 'package:production/resources/hard_coded.dart';
 
-class ProductManager {
-  Future<double> getLettuceWeight() async {
-    int totalLWeight = 0;
-    double doubleLWeight = 0;
-    var sYearList =
-        await ProductionSheetsApi.productSheet?.values.columnByKey('year');
-    var sMonthList =
-        await ProductionSheetsApi.productSheet?.values.columnByKey('month');
-    var sWeightList =
-        await ProductionSheetsApi.productSheet?.values.columnByKey('weight');
-    var sNameList =
-        await ProductionSheetsApi.productSheet?.values.columnByKey('name');
-    for (int a = 0; a < sYearList!.length; a++) {
-      if (sYearList[a] == '2022') {
-        if (sMonthList![a] == "December") {
-          if (sNameList![a] == 'lettuce') {
-            totalLWeight += int.tryParse(sWeightList![a])!;
-            doubleLWeight = totalLWeight.toDouble();
-          }
-        }
-      }
-    }
+class ProductManager extends StatefulWidget {
+  const ProductManager({super.key});
 
-    return doubleLWeight;
-  }
-
-  Future<double> getXiaoBaiWeight() async {
-    int totalXbWeight = 0;
-    double doubleXbWeight = 0;
-    var sYearList =
-        await ProductionSheetsApi.productSheet?.values.columnByKey('year');
-    var sMonthList =
-        await ProductionSheetsApi.productSheet?.values.columnByKey('month');
-    var sWeightList =
-        await ProductionSheetsApi.productSheet?.values.columnByKey('weight');
-    var sNameList =
-        await ProductionSheetsApi.productSheet?.values.columnByKey('name');
-    for (int b = 0; b < sYearList!.length; b++) {
-      if (sYearList[b] == '2022') {
-        if (sMonthList![b] == "December") {
-          if (sNameList![b] == 'xiaobai') {
-            totalXbWeight += int.tryParse(sWeightList![b])!;
-            doubleXbWeight = totalXbWeight.toDouble();
-          }
-        }
-      }
-    }
-    return doubleXbWeight;
-  }
-
-  Future<double> getNaiBaiWeight() async {
-    int totalNbWeight = 0;
-    double doubleNbWeight = 0;
-    var sYearList =
-        await ProductionSheetsApi.productSheet?.values.columnByKey('year');
-    var sMonthList =
-        await ProductionSheetsApi.productSheet?.values.columnByKey('month');
-    var sWeightList =
-        await ProductionSheetsApi.productSheet?.values.columnByKey('weight');
-    var sNameList =
-        await ProductionSheetsApi.productSheet?.values.columnByKey('name');
-
-    for (int c = 0; c < sYearList!.length; c++) {
-      if (sYearList[c] == '2022') {
-        if (sMonthList![c] == "December") {
-          if (sNameList![c] == 'naibai') {
-            totalNbWeight += int.tryParse(sWeightList![c])!;
-            doubleNbWeight = totalNbWeight.toDouble();
-          }
-        }
-      }
-    }
-    return doubleNbWeight;
-  }
-
-  Future<double> getLettuceNumber() async {
-    int totalLNumber = 0;
-    double doubleLNumber = 0;
-    var sYearList =
-        await ProductionSheetsApi.productSheet?.values.columnByKey('year');
-    var sMonthList =
-        await ProductionSheetsApi.productSheet?.values.columnByKey('month');
-    var sWeightList =
-        await ProductionSheetsApi.productSheet?.values.columnByKey('weight');
-    var sNameList =
-        await ProductionSheetsApi.productSheet?.values.columnByKey('name');
-    for (int d = 0; d < sYearList!.length; d++) {
-      if (sYearList[d] == '2022') {
-        if (sMonthList![d] == "November") {
-          if (sNameList![d] == 'lettuce') {
-            totalLNumber += int.tryParse(sWeightList![d])!;
-            doubleLNumber = totalLNumber.toDouble();
-          }
-        }
-      }
-    }
-    return doubleLNumber;
-  }
-
-  Future<double> getXiaoBaiNumber() async {
-    int totalXbNumber = 0;
-    double doubleXbNumber = 0;
-    var sYearList =
-        await ProductionSheetsApi.productSheet?.values.columnByKey('year');
-    var sMonthList =
-        await ProductionSheetsApi.productSheet?.values.columnByKey('month');
-    var sWeightList =
-        await ProductionSheetsApi.productSheet?.values.columnByKey('weight');
-    var sNameList =
-        await ProductionSheetsApi.productSheet?.values.columnByKey('name');
-    for (int i = 0; i < sYearList!.length; i++) {
-      if (sYearList[i] == '2022') {
-        if (sMonthList![i] == "November") {
-          if (sNameList![i] == 'lettuce') {
-            totalXbNumber += int.tryParse(sWeightList![i])!;
-            doubleXbNumber = totalXbNumber.toDouble();
-          }
-        }
-      }
-    }
-    return doubleXbNumber;
-  }
-
-  Future<double> getNaiBaiNumber() async {
-    int totalNbNumber = 0;
-    double doubleNbNumber = 0;
-    var sYearList =
-        await ProductionSheetsApi.productSheet?.values.columnByKey('year');
-    var sMonthList =
-        await ProductionSheetsApi.productSheet?.values.columnByKey('month');
-    var sWeightList =
-        await ProductionSheetsApi.productSheet?.values.columnByKey('weight');
-    var sNameList =
-        await ProductionSheetsApi.productSheet?.values.columnByKey('name');
-    for (int x = 0; x < sYearList!.length; x++) {
-      if (sYearList[x] == '2022') {
-        if (sMonthList![x] == "November") {
-          if (sNameList![x] == 'lettuce') {
-            totalNbNumber += int.tryParse(sWeightList![x])!;
-            doubleNbNumber = totalNbNumber.toDouble();
-          }
-        }
-      }
-    }
-    return doubleNbNumber;
-  }
+  @override
+  State<ProductManager> createState() => ProductManagerState();
 }
 
+class ProductManagerState extends State<ProductManager> {
+  String? selectedPaimon = "September",
+      selectedPaiYear = "2022",
+      combinedMonth,
+      combinedYear;
 
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Align(
+          alignment: const AlignmentDirectional(1, 0.3),
+          child: Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 10, 0),
+            child: DropdownButton<String>(
+              hint: const Text("Select Month "),
+              elevation: 2,
+              value: selectedPaimon,
+              items: Resources.monthList.map(buildMonth).toList(),
+              onChanged: (selectedPaimon) {
+                setState(() => this.selectedPaimon = selectedPaimon);
+                if (selectedPaimon != null) {
+                  chooseMonth(selectedPaimon);
+                } else {
+                  throw Exception("selectedPaimon is null");
+                }
+              },
+              underline: const SizedBox(),
+            ),
+          ),
+        ),
+        Align(
+          alignment: const AlignmentDirectional(1, 0.3),
+          child: Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 10, 0),
+            child: DropdownButton<String>(
+              hint: const Text("Select Year "),
+              elevation: 2,
+              value: selectedPaiYear,
+              items: Resources.yearList.map(buildYear).toList(),
+              onChanged: (selectedPaiYear) {
+                setState(() {
+                  this.selectedPaiYear = selectedPaiYear;
+                  if (selectedPaiYear != null) {
+                    chooseYear(selectedPaiYear);
+                    print(chooseMonth(selectedPaiYear));
+                  } else {
+                    throw Exception("SelectedPaiYear is null");
+                  }
+                });
+              },
+              underline: const SizedBox(),
+            ),
+          ),
+        ),
+        Align(
+          child: Text(selectedPaiYear.toString()),
+        ),
+        Align(
+          child: Text(selectedPaimon.toString()),
+        )
+      ],
+    );
+  }
 
+  String chooseMonth(String month) {
+    String selectedMonth = month;
+    return selectedMonth;
+  }
 
+  String chooseYear(String year) {
+    String selectedYear = year;
+    return selectedYear;
+  }
 
+  void combined(String? month, String? year) {
+    if (month != null) {
+      combinedMonth = chooseMonth(month);
+    }
+    if (year != null) {
+      combinedYear = chooseYear(year);
+    }
+  }
 
-  // Future<Products?> getByYear(String year) async {
-  //   await ProductionSheetsApi.init();
-  //   final mapYear = await sheets?.values.map.rowByKey(
-  //     year,
-  //     fromColumn: 1,
-  //   );
-  //   return mapYear == null ? null : Products.fromGsheets(mapYear);
-  // }
-
-  // Future<Products?> getByMonth(String month) async {
-  //   await ProductionSheetsApi.init();
-  //   final mapMonth = await sheets?.values.map.rowByKey(
-  //     month,
-  //     fromColumn: 2,
-  //   );
-  //   print(mapMonth);
-  //   return mapMonth == null ? null : Products.fromGsheets(mapMonth);
-  // }
-
-  // Future<String> weightByMonth(String month) async {
-  //   await ProductionSheetsApi.init();
-  //   var weightMonth =
-  //       await sheets?.values.valueByKeys(rowKey: month, columnKey: 'weight');
-  //   return weightMonth!;
-  // }
-
+  DropdownMenuItem<String> buildMonth(String monthItem) => DropdownMenuItem(
+        value: monthItem,
+        child: Text(monthItem),
+      );
+  DropdownMenuItem<String> buildYear(String yearItem) => DropdownMenuItem(
+        value: yearItem,
+        child: Text(yearItem),
+      );
+}

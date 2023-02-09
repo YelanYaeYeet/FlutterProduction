@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Indicator extends StatelessWidget {
   const Indicator({
@@ -7,9 +8,10 @@ class Indicator extends StatelessWidget {
     required this.text,
     required this.isSquare,
     this.size = 16,
-    this.textColor = const Color(0xff505050),
+    this.textColor = const Color(0xff505050), required this.picture,
   });
   final Color color;
+  final SvgPicture picture;
   final String text;
   final bool isSquare;
   final double size;
